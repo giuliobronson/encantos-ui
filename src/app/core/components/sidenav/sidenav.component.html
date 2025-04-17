@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened disableClose="true" class="sidenav">
+        <div class="sidenav-content">
+            <mat-nav-list>
+                <a mat-list-item routerLink="/home" routerLinkActive="active-link">
+                    <mat-icon>home</mat-icon>
+                    <span class="menu-text">Home</span>
+                </a>
+                <a mat-list-item routerLink="/alunos" routerLinkActive="active-link">
+                    <mat-icon>school</mat-icon>
+                    <span class="menu-text">Alunos</span>
+                </a>
+                <a mat-list-item routerLink="/disciplinas" routerLinkActive="active-link">
+                    <mat-icon>menu_book</mat-icon>
+                    <span class="menu-text">Disciplinas</span>
+                </a>
+                <a mat-list-item routerLink="/professores" routerLinkActive="active-link">
+                    <mat-icon>person</mat-icon>
+                    <span class="menu-text">Professores</span>
+                </a>
+                <a mat-list-item routerLink="/turmas" routerLinkActive="active-link">
+                    <mat-icon>groups</mat-icon>
+                    <span class="menu-text">Turmas</span>
+                </a>
+            </mat-nav-list>
+            <figure class="logo">
+                <img src="assets/images/logo.png" alt="Logo">
+            </figure>
+        </div>
+    </mat-sidenav>
+    <ng-content></ng-content>
+</mat-sidenav-container>

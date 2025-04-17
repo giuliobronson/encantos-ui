@@ -1,0 +1,9 @@
+<section class="listar-alunos">
+    <h1>Alunos</h1>
+
+    <app-table
+        *ngIf="alunos?.length"
+        [elementData]="alunos"
+        [displayedColumns]="alunoFields">
+    </app-table>
+</section>

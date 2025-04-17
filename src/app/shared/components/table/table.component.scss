@@ -1,0 +1,67 @@
+.table-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    .filtro-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        table {
+            &.mat-table {
+                tr {
+                    &.mat-row {
+                        transition: background-color 0.2s ease-in-out;
+                        cursor: pointer;
+                        
+                        &.selected {
+                            background-color: var(--green);
+
+                            td {
+                                color: var(--white);
+                            }
+                        }
+        
+                        &:hover:not(.selected) {
+                            background-color: var(--white); // hover suave
+                        }
+                    }
+                }
+            }
+        }
+
+        mat-paginator {
+            margin: 16px 0;
+            background-color: transparent;
+        }
+    }
+
+    // Botões flutuantes ao lado da tabela
+    .mini-fab-buttons {
+        position: sticky;   
+        top: 20px;
+        margin-top: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        button {
+            &.adicionar-button {
+                background-color: var(--rose);
+            }
+
+            &.ver-button {
+                background-color: var(--blue);
+            }
+
+            &.editar-button {
+                background-color: var(--green);
+            }
+
+            &.excluir-button {
+                background-color: var(--orange);
+            }
+        }
+    }
+}
