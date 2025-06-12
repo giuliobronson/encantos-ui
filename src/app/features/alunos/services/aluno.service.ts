@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Aluno } from '../models/aluno';
+import { Aluno } from '../models/aluno.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { TurmaAluno } from '../models/turma-aluno.interface';
+import { Page } from 'src/app/shared/models/page.interface';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class AlunoService {
@@ -13,8 +15,28 @@ export class AlunoService {
 
   constructor(private http: HttpClient) { }
 
-  getAlunos(): Observable<Aluno[]> {
-    return this.http.get<Aluno[]>(this.API)
+  createAluno(aluno: Aluno): Observable<Aluno> {
+    return this.http.post<Aluno>(`${this.API}`, aluno)
+  }
+
+  getAlunos(): Observable<Page<Aluno>> {
+    return this.http.get<Page<Aluno>>(`${this.API}`)
+  }
+
+  getAlunoById(id: number): Observable<Aluno> {
+    return this.http.get<Aluno>(`${this.API}/${id}`)
+  }
+
+  getTurmasByAluno(id: number) {
+    return this.http.get<TurmaAluno[]>(`${this.API}/${id}`)
+  }
+
+  editAluno(aluno: Aluno): Observable<Aluno> {
+    return this.http.put<Aluno>(`${this.API}`, aluno)
+  }
+
+  deleteAluno(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/${id}`)
   }
 
 }

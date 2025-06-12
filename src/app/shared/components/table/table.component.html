@@ -9,7 +9,7 @@
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container *ngFor="let columnKey of columnKeys" [matColumnDef]="columnKey">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ displayedColumns[columnKey] }} </th>
-                <td mat-cell *matCellDef="let item"> {{ item[columnKey] }} </td>
+                <td mat-cell *matCellDef="let item"> {{ formatColumn(item[columnKey]) }} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnKeys"></tr>
             <tr mat-row *matRowDef="let row; columns: columnKeys;" (click)="onRowClicked(row)"
@@ -20,17 +20,17 @@
     </div>
 
     <div class="mini-fab-buttons">
-        <button mat-mini-fab class="adicionar-button" aria-label="Excluir">
+        <button mat-mini-fab mat-raised-button class="adicionar-button" aria-label="Adicionar" (click)="handleFabClick('cadastrar')">
             <mat-icon>add</mat-icon>
         </button>
         <ng-container *ngIf="selectedRow">
-            <button mat-mini-fab class="ver-button" aria-label="Excluir">
+            <button mat-mini-fab mat-raised-button class="exibir-button" aria-label="Exibir" (click)="handleFabClick('exibir')">
                 <mat-icon>visibility</mat-icon>
             </button>
-            <button mat-mini-fab class="editar-button" aria-label="Editar">
+            <button mat-mini-fab mat-raised-button class="editar-button" aria-label="Editar" (click)="handleFabClick('editar')">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-mini-fab class="excluir-button" aria-label="Excluir">
+            <button mat-mini-fab mat-raised-button class="excluir-button" aria-label="Excluir" (click)="handleFabClick('excluir')">
                 <mat-icon>delete</mat-icon>
             </button>
         </ng-container>

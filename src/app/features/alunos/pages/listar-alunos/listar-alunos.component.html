@@ -2,8 +2,8 @@
     <h1>Alunos</h1>
 
     <app-table
-        *ngIf="alunos?.length"
         [elementData]="alunos"
-        [displayedColumns]="alunoFields">
+        [displayedColumns]="alunoFields"
+        (action)="openDialog($event)">
     </app-table>
 </section>

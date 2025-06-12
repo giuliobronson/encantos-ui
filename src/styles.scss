@@ -1,3 +1,36 @@
+@use '@angular/material' as mat;
+
+$blue: #4C609B;
+$green: #77A699;
+$orange: #F2836B;
+$white: #F2F2F2;
+
+$blue-palette: mat.define-palette((
+  500: $blue,
+  contrast: (500: $white)
+));
+
+$green-palette: mat.define-palette((
+  500: $green,
+  contrast: (500: $white)
+));
+
+$orange-palette: mat.define-palette((
+  500: $orange,
+  contrast: (500: $white)
+));
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $green-palette,  
+    accent: $blue-palette,
+    warn: $orange-palette,
+  )
+));
+  
+// Aplica o tema para todos os componentes do Angular Material
+@include mat.all-component-themes($my-theme);
+
 :root {
     --rose: #F299C2;
     --green: #77A699;

@@ -9,9 +9,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TableComponent } from './components/table/table.component';
 
-
-
-
 @NgModule({
   declarations: [
     TableComponent

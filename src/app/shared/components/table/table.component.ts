@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -7,14 +7,14 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent<T> implements OnInit, AfterViewInit {
+export class TableComponent<T> implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
-  @Input() elementData!: T[]
+  @Input() elementData!: T[];
   @Input() displayedColumns!: { [key: string]: string };
-  @Output() action = new EventEmitter<{ click: string }>();
+  @Output() action = new EventEmitter<{ actionType: string, data?: T }>();
 
   dataSource = new MatTableDataSource<T>();
-  selectedRow: T | null = null;
+  selectedRow?: T;
 
   constructor() { }
 
@@ -37,9 +37,26 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
+  handleFabClick(actionType: string) {
+    this.action.emit({
+      actionType: actionType,
+      data: this.selectedRow
+    });
+  }
+
+  formatColumn(value: any): string {
+    if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+      const date = new Date(value);
+      return new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit', month: '2-digit', year: 'numeric'
+      }).format(date);
+    }
+
+    return value.toString();
+  }
+
   get columnKeys(): string[] {
     return Object.keys(this.displayedColumns)
   }
-
 
 }

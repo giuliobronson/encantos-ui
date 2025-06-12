@@ -1,0 +1,13 @@
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    .nome-field {
+        grid-column: span 2;
+    }
+}
+
+::ng-deep .mat-form-field .mat-form-field-suffix .mat-icon-button {
+    height: 0 !important;
+}
