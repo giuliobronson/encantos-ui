@@ -5,6 +5,7 @@ import { ACTION_STRATEGIES } from '../../shared/action-strategy.token';
 import { FabActionStrategy } from '../../shared/fab-action-strategy.interface';
 import { TableService } from 'src/app/shared/services/table.service';
 import { Subject, takeUntil } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listar-alunos',
@@ -13,6 +14,9 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ListarAlunosComponent implements OnInit, OnDestroy {
 
+  totalAlunos: number = 0;
+  pageIndex: number = 0;
+  pageSize: number = 8;
   alunos: Aluno[] = [];
   alunoFields = {
     id: 'Id',
@@ -40,9 +44,16 @@ export class ListarAlunosComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadAlunos() {
-    this.alunoService.getAlunos().subscribe({
-      next: alunos => this.alunos = alunos.content,
+  loadAlunos(event?: PageEvent) {
+    if (event) {
+      this.pageIndex = event.pageIndex;
+      this.pageSize = event.pageSize;
+    }
+    this.alunoService.getAlunos(this.pageIndex, this.pageSize).subscribe({
+      next: response => {
+        this.alunos = response.content;
+        this.totalAlunos = response.page.totalElements;
+      },
       error: () => this.alunos = []
     });
   }

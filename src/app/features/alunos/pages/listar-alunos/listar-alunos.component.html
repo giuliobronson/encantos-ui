@@ -4,6 +4,8 @@
     <app-table
         [elementData]="alunos"
         [displayedColumns]="alunoFields"
-        (action)="openDialog($event)">
+        [totalElements]="totalAlunos"
+        (action)="openDialog($event)"
+        (page)="loadAlunos($event)">
     </app-table>
 </section>
