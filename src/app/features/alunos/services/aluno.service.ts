@@ -19,10 +19,11 @@ export class AlunoService {
     return this.http.post<Aluno>(`${this.API}`, aluno)
   }
 
-  getAlunos(page: number = 0, size: number = 10): Observable<Page<Aluno>> {
+  getAlunos(page: number = 0, size: number = 10, filter: string = ''): Observable<Page<Aluno>> {
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('filter', filter);
     return this.http.get<Page<Aluno>>(`${this.API}`, { params });
   }
 

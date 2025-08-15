@@ -5,6 +5,7 @@
         [elementData]="alunos"
         [displayedColumns]="alunoFields"
         [totalElements]="totalAlunos"
+        (filter)="applyFilter($event)"
         (action)="openDialog($event)"
         (page)="loadAlunos($event)">
     </app-table>

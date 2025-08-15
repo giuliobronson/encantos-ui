@@ -19,6 +19,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit, OnChanges {
   @Input() pageIndex: number = 0;
   @Output() action = new EventEmitter<{ actionType: string, data?: T }>();
   @Output() page = new EventEmitter<PageEvent>();
+  @Output() filter = new EventEmitter<string>();
   
   dataSource = new MatTableDataSource<T>();
   selectedRow?: T;
@@ -41,7 +42,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit, OnChanges {
   }
 
   applyFilter(value: string) {
-    this.dataSource.filter = value.trim().toLowerCase();
+    this.filter.emit(value);
   }
   
   handleFabClick(actionType: string) {

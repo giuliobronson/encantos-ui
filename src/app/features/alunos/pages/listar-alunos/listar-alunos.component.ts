@@ -17,6 +17,7 @@ export class ListarAlunosComponent implements OnInit, OnDestroy {
   totalAlunos: number = 0;
   pageIndex: number = 0;
   pageSize: number = 8;
+  filter: string = '';
   alunos: Aluno[] = [];
   alunoFields = {
     id: 'Id',
@@ -49,7 +50,7 @@ export class ListarAlunosComponent implements OnInit, OnDestroy {
       this.pageIndex = event.pageIndex;
       this.pageSize = event.pageSize;
     }
-    this.alunoService.getAlunos(this.pageIndex, this.pageSize).subscribe({
+    this.alunoService.getAlunos(this.pageIndex, this.pageSize, this.filter).subscribe({
       next: response => {
         this.alunos = response.content;
         this.totalAlunos = response.page.totalElements;
@@ -61,6 +62,11 @@ export class ListarAlunosComponent implements OnInit, OnDestroy {
   openDialog(action: { actionType: string, data?: Aluno }): void {
     const strategy = this.actionStrategies[action.actionType];
     strategy.execute(action?.data);
+  }
+
+  applyFilter(filter: string) {
+    this.filter = filter;
+    this.loadAlunos();
   }
 
   ngOnDestroy(): void {
